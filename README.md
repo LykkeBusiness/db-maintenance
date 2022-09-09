@@ -1,2 +1,2 @@
 # db-maintenance
-Scripts for maintaining and cleamin
+Scripts for maintaining and cleaning up the db
