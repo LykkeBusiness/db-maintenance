@@ -24,11 +24,13 @@ The script algorithm:
 
 ## How to use
 
-- Determine the biggest tables by executing **get_big_tables.sql*
+- Determine the biggest tables by executing **get_big_tables.sql**
 - Stop the corresponding services (usually mtcore, commission, bookkeeper)
 - Execute the maintenance scripts one by one (do not try to do this in parallel)
-- Check that the tables use less space by executing **get_big_tables.sql* script again
+- Check that the tables use less space by executing **get_big_tables.sql** script again
 
 ## Final thoughts
 
 The scripts only release the logical space - the space taken on disc is not changed. You will need to use "shrink files" functionality of Sql Server to achieve that.
+
+**get_db_space.sql** shows how much space is used and how much can be freed.
