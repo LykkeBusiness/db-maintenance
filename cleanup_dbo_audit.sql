@@ -87,6 +87,7 @@ PRINT 'Data transfered to the maintenance table'
 truncate TABLE [dbo].[AuditTrail]
 
 -- transfer data back
+SET IDENTITY_INSERT [dbo].[AuditTrail] ON;
 
 insert into [dbo].[AuditTrail] (
         [Id],
@@ -106,7 +107,9 @@ insert into [dbo].[AuditTrail] (
         [DataType],
         [DataReference],
         [DataDiff]
-    from [maintenance].[AuditTrail] (NOLOCK)
+    from [maintenance].[AuditTrail] (NOLOCK);
+
+SET IDENTITY_INSERT [dbo].[AuditTrail] OFF;
 
 PRINT 'Data transfered back to the original table'
 

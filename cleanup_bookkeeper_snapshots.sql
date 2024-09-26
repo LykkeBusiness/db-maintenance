@@ -27,7 +27,7 @@ IF NOT EXISTS (SELECT 0
  BEGIN
     
     CREATE TABLE [maintenance].[ReferentialDataSnapshots](
-	[OID] [bigint] IDENTITY(1,1) NOT NULL,
+	[OID] [bigint] NOT NULL,
 	[TradingDay] [date] NOT NULL,
 	[EventId] [nvarchar](64) NOT NULL,
 	[Timestamp] [datetime] NOT NULL,
@@ -85,6 +85,7 @@ PRINT 'Data transfered to the maintenance table'
 truncate TABLE [bookkeeper].[ReferentialDataSnapshots]
 
 -- transfer data back
+SET IDENTITY_INSERT [bookkeeper].[ReferentialDataSnapshots] ON;
 
 insert into [bookkeeper].[ReferentialDataSnapshots] (
         [OID],
@@ -103,6 +104,8 @@ insert into [bookkeeper].[ReferentialDataSnapshots] (
         [Value],
         [Status]
     from [maintenance].[ReferentialDataSnapshots] (NOLOCK)
+
+SET IDENTITY_INSERT [bookkeeper].[ReferentialDataSnapshots] OFF;
 
 PRINT 'Data transfered back to the original table'
 
